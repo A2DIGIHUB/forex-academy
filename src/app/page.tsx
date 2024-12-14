@@ -271,131 +271,100 @@ export default function Home() {
 
       {/* Why Choose Us Section */}
       <section className="py-24 bg-[#1E293B] relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-5">
+        {/* Animated Background Pattern */}
+        <motion.div
+          className="absolute inset-0 opacity-5"
+          animate={{
+            backgroundPosition: ['0% 0%', '100% 100%'],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        >
           <div className="absolute inset-0" style={{
             backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
+            backgroundSize: '60px 60px',
           }} />
-        </div>
+        </motion.div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center mb-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="space-y-4"
-            >
-              <span className="inline-block px-4 py-2 rounded-full bg-[#F59E0B]/20 text-[#F59E0B] text-sm font-semibold">
-                Why Choose Us
-              </span>
-              <h2 className="text-4xl md:text-5xl font-bold text-white">
-                Your Success is Our Priority
-              </h2>
-              <p className="text-xl text-[#D1D5DB] max-w-3xl mx-auto">
-                Join thousands of successful traders who have transformed their trading journey with our comprehensive education and support system.
-              </p>
-            </motion.div>
-          </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl font-bold text-white mb-4">Why Choose Our Academy</h2>
+            <p className="text-[#D1D5DB] max-w-2xl mx-auto">
+              Experience the difference with our comprehensive forex trading education
+            </p>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {whyChooseUsFeatures.map((feature, index) => (
               <motion.div
-                key={feature.title}
+                key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-[#2D3748] rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-300 hover:transform hover:scale-105 group"
+                className="bg-[#2D3748] p-8 rounded-lg hover:bg-[#374151] transition-all duration-300 group"
               >
-                <div className="relative h-12 w-12 mb-8">
-                  <div className="absolute inset-0 bg-[#F59E0B]/20 rounded-xl transform rotate-6 transition-transform group-hover:rotate-12" />
-                  <div className="absolute inset-0 bg-[#F59E0B]/20 rounded-xl transform -rotate-6 transition-transform group-hover:-rotate-12" />
-                  <div className="relative flex items-center justify-center h-full w-full bg-[#F59E0B] rounded-xl text-white">
+                <div className="mb-6 text-[#F59E0B]">
+                  <div className="w-12 h-12">
                     {feature.icon}
                   </div>
                 </div>
-                
-                <h3 className="text-2xl font-semibold text-white mb-4 group-hover:text-[#F59E0B] transition-colors">
-                  {feature.title}
-                </h3>
-                <p className="text-[#D1D5DB] leading-relaxed">
-                  {feature.description}
-                </p>
-                
+                <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-[#F59E0B] transition-colors">{feature.title}</h3>
+                <p className="text-[#D1D5DB] mb-6">{feature.description}</p>
                 {feature.stats && (
-                  <div className="mt-6 pt-6 border-t border-gray-700">
-                    <dl className="grid grid-cols-2 gap-4">
-                      {feature.stats.map((stat) => (
-                        <div key={stat.label} className="text-center">
-                          <dt className="text-sm text-[#D1D5DB]">{stat.label}</dt>
-                          <dd className="text-2xl font-bold text-[#F59E0B]">{stat.value}</dd>
-                        </div>
-                      ))}
-                    </dl>
+                  <div className="grid grid-cols-2 gap-4 pt-4 border-t border-gray-700">
+                    {feature.stats.map((stat, idx) => (
+                      <div key={idx} className="text-center">
+                        <div className="text-[#F59E0B] font-bold text-lg">{stat.value}</div>
+                        <div className="text-[#D1D5DB] text-sm">{stat.label}</div>
+                      </div>
+                    ))}
                   </div>
                 )}
               </motion.div>
             ))}
           </div>
-
-          <div className="mt-16 text-center">
-            <Link
-              href="/courses"
-              className="inline-flex items-center space-x-2 bg-[#F59E0B] text-white px-8 py-4 rounded-lg font-semibold hover:bg-yellow-500 transition-all duration-300 transform hover:scale-105 group"
-            >
-              <span>Start Learning Today</span>
-              <svg
-                className="w-5 h-5 transform transition-transform group-hover:translate-x-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </Link>
-          </div>
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-24 bg-[#1E293B]">
+      <section className="py-24 bg-[#000000]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
             <h2 className="text-3xl font-bold text-white mb-4">What Our Students Say</h2>
-            <p className="text-xl text-[#D1D5DB]">
-              Hear from our community of successful traders
+            <p className="text-[#D1D5DB] max-w-2xl mx-auto">
+              Hear from our successful students who have transformed their trading journey with us
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
               <motion.div
                 key={index}
-                className="bg-[#2D3748] p-8 rounded-xl shadow-lg relative"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
+                className="bg-[#1E293B] p-8 rounded-lg relative"
               >
-                <div className="absolute -top-4 left-8">
-                  <span className="text-4xl">💬</span>
-                </div>
-                <div className="pt-4">
-                  <p className="text-[#D1D5DB] mb-6">{testimonial.content}</p>
-                  <div className="flex items-center">
-                    <div className="flex-shrink-0">
-                      <div className="h-12 w-12 rounded-full bg-[#F59E0B]/20 flex items-center justify-center">
-                        <span className="text-[#F59E0B] text-xl font-semibold">
-                          {testimonial.author[0]}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="ml-4">
-                      <h4 className="text-white font-semibold">{testimonial.author}</h4>
-                      <p className="text-[#D1D5DB] text-sm">{testimonial.title}</p>
-                    </div>
-                  </div>
+                <div className="text-[#F59E0B] text-4xl mb-4">"</div>
+                <p className="text-[#D1D5DB] mb-6">{testimonial.content}</p>
+                <div>
+                  <div className="font-semibold text-white">{testimonial.author}</div>
+                  <div className="text-[#D1D5DB]">{testimonial.title}</div>
                 </div>
               </motion.div>
             ))}
@@ -524,40 +493,6 @@ export default function Home() {
                 </form>
               </div>
             </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-24 bg-[#1E293B]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl font-bold text-white mb-4">Why Choose Our Academy</h2>
-            <p className="text-[#D1D5DB] max-w-2xl mx-auto">
-              Experience the difference with our comprehensive forex trading education
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {whyChooseUsFeatures.map((feature, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-[#2D3748] p-6 rounded-lg hover:bg-[#374151] transition-colors"
-              >
-                <div className="text-[#F59E0B] mb-4 text-3xl">{feature.icon}</div>
-                <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
-                <p className="text-[#D1D5DB]">{feature.description}</p>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
