@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
@@ -51,8 +50,8 @@ export default function Home() {
     offset: ["start end", "end start"]
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [0.8, 1]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
+  const heroScale = useTransform(scrollYProgress, [0, 0.5], [0.8, 1]);
 
   return (
     <div className="flex flex-col min-h-screen bg-[#1E293B]" ref={targetRef}>
@@ -529,6 +528,40 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Features Section */}
+      <section className="py-24 bg-[#1E293B]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl font-bold text-white mb-4">Why Choose Our Academy</h2>
+            <p className="text-[#D1D5DB] max-w-2xl mx-auto">
+              Experience the difference with our comprehensive forex trading education
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {whyChooseUsFeatures.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-[#2D3748] p-6 rounded-lg hover:bg-[#374151] transition-colors"
+              >
+                <div className="text-[#F59E0B] mb-4 text-3xl">{feature.icon}</div>
+                <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
+                <p className="text-[#D1D5DB]">{feature.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ... */}
     </div>
   );
@@ -539,153 +572,6 @@ const stats = [
   { value: '95%', label: 'Success Rate' },
   { value: '30+', label: 'Expert Instructors' },
   { value: '24/7', label: 'Support Available' },
-];
-
-const features = [
-  {
-    icon: (
-      <svg
-        className="w-12 h-12"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m-9 0H3m2 0h5m-6 0h-1a1 1 0 00-1 1v1a1 1 0 001 1h1a1 1 0 001-1v-1a1 1 0 00-1-1z"
-        />
-      </svg>
-    ),
-    title: 'Expert Instructors',
-    description:
-      'Learn from professional traders with years of market experience',
-  },
-  {
-    icon: (
-      <svg
-        className="w-12 h-12"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-        />
-      </svg>
-    ),
-    title: 'Comprehensive Curriculum',
-    description:
-      'Structured learning path from basics to advanced trading strategies',
-  },
-  {
-    icon: (
-      <svg
-        className="w-12 h-12"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"
-        />
-      </svg>
-    ),
-    title: 'Community Support',
-    description:
-      'Join a community of traders and get support when you need it',
-  },
-];
-
-const tradingTools = [
-  {
-    icon: '📊',
-    title: 'Advanced Charts',
-    description: 'Professional-grade charting tools with multiple timeframes and indicators.',
-  },
-  {
-    icon: '🔔',
-    title: 'Price Alerts',
-    description: 'Get notified when your target price levels are reached.',
-  },
-  {
-    icon: '📱',
-    title: 'Mobile Trading',
-    description: 'Trade and monitor markets on-the-go with our mobile app.',
-  },
-  {
-    icon: '🤖',
-    title: 'Trading Signals',
-    description: 'Receive expert trading signals and market analysis.',
-  },
-];
-
-const testimonials = [
-  {
-    author: 'John Smith',
-    title: 'Professional Trader',
-    content: 'The comprehensive curriculum and expert guidance helped me transition from a complete beginner to a confident trader.',
-  },
-  {
-    author: 'Sarah Johnson',
-    title: 'Part-time Trader',
-    content: 'I can now effectively manage my investments while maintaining my full-time job. The flexible learning schedule was perfect for me.',
-  },
-  {
-    author: 'Michael Chen',
-    title: 'Student',
-    content: 'The community support and mentorship program have been invaluable in my trading journey. Highly recommended!',
-  },
-];
-
-const courses = [
-  {
-    id: 'beginner-forex',
-    title: 'Beginner Forex Trading',
-    description: 'Learn the basics of forex trading and market analysis',
-    price: '$199',
-    image: '/images/course-1.jpg',
-  },
-  {
-    id: 'technical-analysis',
-    title: 'Technical Analysis Mastery',
-    description: 'Master the art of technical analysis and chart patterns',
-    price: '$299',
-    image: '/images/course-2.jpg',
-  },
-  {
-    id: 'risk-management',
-    title: 'Risk Management Strategies',
-    description: 'Learn how to protect your capital and manage risks',
-    price: '$249',
-    image: '/images/course-3.jpg',
-  },
-];
-
-const faqs = [
-  {
-    question: 'How much money do I need to start trading forex?',
-    answer: 'You can start with as little as $100, though we recommend starting with at least $500 to have more flexibility in position sizing and risk management.',
-  },
-  {
-    question: 'Do I need prior trading experience?',
-    answer: 'No prior experience is needed. Our courses are designed to take you from complete beginner to proficient trader with step-by-step guidance.',
-  },
-  {
-    question: 'How long does it take to complete the courses?',
-    answer: 'Each course is self-paced, but typically takes 4-6 weeks to complete. You\'ll have lifetime access to review the material anytime.',
-  },
-  {
-    question: 'What support do you provide?',
-    answer: 'We offer 24/7 technical support, weekly live webinars, and a community forum where you can interact with other traders and our instructors.',
-  },
 ];
 
 const whyChooseUsFeatures = [
@@ -728,4 +614,22 @@ const whyChooseUsFeatures = [
       { label: "Support", value: "24/7" }
     ]
   }
+];
+
+const testimonials = [
+  {
+    author: 'John Smith',
+    title: 'Professional Trader',
+    content: 'The comprehensive curriculum and expert guidance helped me transition from a complete beginner to a confident trader.',
+  },
+  {
+    author: 'Sarah Johnson',
+    title: 'Part-time Trader',
+    content: 'I can now effectively manage my investments while maintaining my full-time job. The flexible learning schedule was perfect for me.',
+  },
+  {
+    author: 'Michael Chen',
+    title: 'Student',
+    content: 'The community support and mentorship program have been invaluable in my trading journey. Highly recommended!',
+  },
 ];
