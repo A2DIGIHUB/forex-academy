@@ -118,8 +118,8 @@ export default function Header() {
                 leaveFrom="transform scale-100 opacity-100"
                 leaveTo="transform scale-95 opacity-0"
               >
-                <Disclosure.Panel className="lg:hidden">
-                  <div className="px-2 pt-2 pb-3 space-y-1">
+                <Disclosure.Panel className="lg:hidden absolute top-full left-0 right-0 bg-[#1E293B]/95 backdrop-blur-sm shadow-lg">
+                  <div className="px-4 pt-2 pb-3 space-y-1">
                     {navigation.map((item) => (
                       <div key={item.name}>
                         {item.children ? (
@@ -127,20 +127,16 @@ export default function Header() {
                             {({ open }) => (
                               <>
                                 <Disclosure.Button
-                                  className={`w-full flex justify-between items-center px-3 py-2 text-sm font-medium rounded-md ${
-                                    pathname === item.href
-                                      ? 'text-[#F59E0B] bg-[#2D3748]'
-                                      : 'text-gray-300 hover:text-white hover:bg-[#2D3748]'
-                                  }`}
+                                  className="w-full flex justify-between items-center px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-[#2D3748] rounded-md"
                                 >
-                                  {item.name}
+                                  <span>{item.name}</span>
                                   <svg
                                     className={`${
                                       open ? 'transform rotate-180' : ''
                                     } w-5 h-5 text-gray-300`}
                                     fill="none"
-                                    viewBox="0 0 24 24"
                                     stroke="currentColor"
+                                    viewBox="0 0 24 24"
                                   >
                                     <path
                                       strokeLinecap="round"
@@ -150,12 +146,12 @@ export default function Header() {
                                     />
                                   </svg>
                                 </Disclosure.Button>
-                                <Disclosure.Panel className="px-4 pt-4 pb-2 space-y-1">
+                                <Disclosure.Panel className="px-4 pt-2 pb-2 space-y-1">
                                   {item.children.map((child) => (
                                     <Link
                                       key={child.name}
                                       href={child.href}
-                                      className="block px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-white hover:bg-[#2D3748]"
+                                      className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-[#2D3748] rounded-md"
                                     >
                                       {child.name}
                                     </Link>
@@ -167,7 +163,7 @@ export default function Header() {
                         ) : (
                           <Link
                             href={item.href}
-                            className={`block px-3 py-2 rounded-md text-sm font-medium ${
+                            className={`block px-3 py-2 text-base font-medium rounded-md ${
                               pathname === item.href
                                 ? 'text-[#F59E0B] bg-[#2D3748]'
                                 : 'text-gray-300 hover:text-white hover:bg-[#2D3748]'
